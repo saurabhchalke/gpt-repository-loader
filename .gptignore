@@ -19,4 +19,4 @@ LICENSE
 target/*
 *Cargo.lock*
 experiments/*.txt
-LICENSE
+LICENSE*
