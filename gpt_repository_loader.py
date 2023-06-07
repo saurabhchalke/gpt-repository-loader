@@ -45,6 +45,11 @@ def process_repository_only_filepath(repo_path, ignore_list, output_file):
             if not should_ignore(relative_file_path, ignore_list):
                 output_file.write("-" * 4 + "\n")
                 output_file.write(f"{relative_file_path}\n")
+                # print file content only if it is a md file
+                if file_path.endswith(".md"):
+                    with open(file_path, "r", errors="ignore") as file:
+                        contents = file.read()
+                    output_file.write(f"{contents}\n")
 
 
 if __name__ == "__main__":
@@ -89,7 +94,7 @@ if __name__ == "__main__":
         else:
             if only_filepath:
                 output_file.write(
-                    "The following text is a Git repository with code. The structure of the text are sections that begin with ----, followed by a single line containing the file path and file name. The text representing the Git repository ends when the symbols --END-- are encounted. Any further text beyond --END-- are meant to be interpreted as instructions using the aforementioned Git repository as context.\n"
+                    "The following text is a Git repository with code. The structure of the text are sections that begin with ----, followed by a single line containing the file path and file name (variable amount of lines only for the file contents of md files). The text representing the Git repository ends when the symbols --END-- are encounted. Any further text beyond --END-- are meant to be interpreted as instructions using the aforementioned Git repository as context.\n"
                 )
             else:
                 output_file.write(
