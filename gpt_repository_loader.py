@@ -85,6 +85,10 @@ if __name__ == "__main__":
     only_filepath = False
     if "-f" in sys.argv:
         only_filepath = True
+    
+    # delete the output file if it exists
+    if os.path.exists(output_file_path):
+        os.remove(output_file_path)
 
     with open(output_file_path, "w") as output_file:
         if preamble_file:
