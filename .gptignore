@@ -16,3 +16,7 @@ LICENSE
 *.jpeg
 *.jpg
 *bin/*
+target/*
+*Cargo.lock*
+experiments/*.txt
+LICENSE
