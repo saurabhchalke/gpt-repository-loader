@@ -45,8 +45,8 @@ def process_repository_only_filepath(repo_path, ignore_list, output_file):
             if not should_ignore(relative_file_path, ignore_list):
                 output_file.write("-" * 4 + "\n")
                 output_file.write(f"{relative_file_path}\n")
-                # print file content only if it is a md file
-                if file_path.endswith(".md"):
+                # print file content only if it is the top level md file
+                if file_path.endswith(".md") and root == repo_path:
                     with open(file_path, "r", errors="ignore") as file:
                         contents = file.read()
                     output_file.write(f"{contents}\n")
@@ -85,7 +85,7 @@ if __name__ == "__main__":
     only_filepath = False
     if "-f" in sys.argv:
         only_filepath = True
-    
+
     # delete the output file if it exists
     if os.path.exists(output_file_path):
         os.remove(output_file_path)
